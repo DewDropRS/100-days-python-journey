@@ -2,7 +2,7 @@
 
 ## About This Training Course
 
-This repository contains my project implementations from the **100 Days of Code - The Complete Python Pro Bootcamp** course. This comprehensive bootcamp teaches Python programming from beginner to advanced levels through 100 days of hands-on projects, covering topics including:
+This repository contains my project implementations from the **100 Days of Code - The Complete Python Pro Bootcamp** course. This comprehensive bootcamp teaches Python programming from beginner to advanced levels through 100 days of hands-on projects, covering the following:
 
 - Python fundamentals and syntax
 - Data structures and algorithms
