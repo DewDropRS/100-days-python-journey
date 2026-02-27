@@ -53,3 +53,11 @@ class Snake:
         for segment in self.segments:
             segment.color(color)
 
+    def reset(self):
+        for segment in self.segments:
+            #move offscreen and hide
+            segment.goto(800,800)
+            segment.hideturtle()
+        self.segments.clear()
+        self.build_snake()
+        self.head = self.segments[0]
