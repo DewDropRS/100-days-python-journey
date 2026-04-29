@@ -1,3 +1,5 @@
+import sys
+import os
 from math import floor
 from tkinter import *
 # ---------------------------- CONSTANTS ------------------------------- #
@@ -13,6 +15,15 @@ LONG_BREAK_MIN = 20
 check_marks = ""
 reps = 0
 timer = None #
+# ---------------------------- Resource Path ------------------------------- #
+def resource_path(relative_path):
+    """Get the correct path to a resource whether running as script or exe."""
+    if hasattr(sys, '_MEIPASS'):
+        # PyInstaller extracts files here at runtime
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
+
 # ---------------------------- TIMER RESET ------------------------------- # 
 def reset_timer():
     global check_marks, timer, reps
@@ -40,7 +51,10 @@ def reset_timer():
     short_break_entry.insert(0, "5")
     long_break_entry.delete(0, END)
     long_break_entry.insert(0, "20")
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
+
+# ---------------------------- TIMER MECHANISM ------------------------------- #
+
+
 def start_timer():
 
     global reps, check_marks, WORK_MIN, SHORT_BREAK_MIN, LONG_BREAK_MIN
@@ -81,10 +95,18 @@ def start_timer():
     # long break for every 8 reps (long break after 4 work timers and 3 short break timers)
     # w(1),sb(2),w(3),sb(4),w(5),sb(6),w(7),lb(8),w(9),sb(10),...,lb(16)
     if reps % 8 == 0: # 8,16,24,...
+        window.lift()
+        window.attributes("-topmost", True)
+        window.attributes("-topmost", False)
+
         count_down(long_break_seconds)
         timer_label.config(text="Long Break\nYou earned it!\n ", fg=RED)
     # else if even (but not evenly divisible by 8), start short break timer
     elif reps % 2 == 0:
+        window.lift()
+        window.attributes("-topmost", True)
+        window.attributes("-topmost", False)
+
         count_down(short_break_seconds)
         timer_label.config(text="Short Break\n \n ", fg=PINK)
     # else odd therefore start work timer
@@ -152,7 +174,7 @@ reset_button = Button(text = "Reset", command = reset_timer, bg = "white", font 
 
 # Tomato
 canvas = Canvas(width=200, height=224, bg = YELLOW, highlightthickness=0)
-tomato_img =PhotoImage(file = "tomato.png")
+tomato_img = PhotoImage(file=resource_path("tomato.png"))
 canvas.create_image(100, 112, image=tomato_img)
 timer_text = canvas.create_text(100, 130, text = "00:00", fill = "white", font = (FONT_NAME, 40, "bold"))
 
