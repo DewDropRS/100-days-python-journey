@@ -1,0 +1,17 @@
+# Progress files — user-specific, auto-generated
+data/*_to_learn.csv
+
+# Keep the source language files in version control
+!data/french_words.csv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# PyCharm
+.idea/
+
+# Virtual environment
+venv/
+.env
